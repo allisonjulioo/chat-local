@@ -1,0 +1,18 @@
+# Roda o chat na porta 80 desta máquina e reinicia junto com o Docker no boot.
+services:
+  chat:
+    image: node:24-alpine
+    container_name: chat-local
+    network_mode: host
+    working_dir: /app
+    volumes:
+      - ./:/app
+      # Lista de fabricantes por prefixo de MAC, usada para nomear aparelhos que não anunciam nome.
+      - /usr/share/ieee-data:/usr/share/ieee-data:ro
+    environment:
+      PORTA: "80"
+      NOME_HOST: chat
+      UID_USUARIO: "1000"
+      GID_USUARIO: "1000"
+    command: node server.js
+    restart: unless-stopped

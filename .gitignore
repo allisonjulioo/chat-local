@@ -1,0 +1,4 @@
+node_modules/
+
+# Mensagens, aparelhos e arquivos da rede
+dados/

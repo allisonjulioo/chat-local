@@ -1,0 +1,16 @@
+{
+  "name": "chat-local",
+  "version": "1.0.0",
+  "description": "Chat pelo Wi-Fi entre todos os aparelhos da rede local, sem conta e sem internet",
+  "license": "MIT",
+  "author": "Allison Nunes",
+  "repository": "github:allisonjulioo/chat-local",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

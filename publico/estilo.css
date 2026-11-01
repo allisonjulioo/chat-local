@@ -1,0 +1,199 @@
+:root {
+  color-scheme: light;
+  --fundo: #e4e6e9;
+  --superficie: #eef0f2;
+  --hover: #e2e5e8;
+  --ativo: #d7dbdf;
+  --linha: #d3d7db;
+  --campo: #f7f8f9;
+  --texto: #23272c;
+  --texto-2: #656c75;
+  --destaque: #3d6f69;
+  --destaque-texto: #ffffff;
+  --bolha-outra: #f5f6f7;
+  --bolha-minha: #cfe0dc;
+  --online: #2f9a58;
+  --erro: #a33a26;
+}
+
+* { box-sizing: border-box; border-radius: 0; }
+html, body { margin: 0; height: 100%; }
+body {
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  -webkit-text-size-adjust: 100%;
+}
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; }
+[hidden] { display: none !important; }
+
+input, textarea {
+  background: var(--campo);
+  border: 1px solid var(--linha);
+  padding: 10px 12px;
+  outline: none;
+  font-size: 16px;
+  -webkit-appearance: none;
+}
+input:focus, textarea:focus { border-color: var(--destaque); }
+
+#app { display: grid; grid-template-columns: 290px 1fr; height: 100vh; height: 100dvh; }
+
+#lista {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--superficie);
+  border-right: 1px solid var(--linha);
+}
+#conversas { flex: 1; overflow-y: auto; padding-top: env(safe-area-inset-top); }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 16px;
+  text-align: left;
+}
+.item:hover { background: var(--hover); }
+.item.ativo { background: var(--ativo); }
+.item.fora .textos { opacity: .5; }
+.ponto { width: 7px; height: 7px; flex: none; }
+.item.aberto .ponto { background: var(--online); }
+.textos { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.nome, .detalhe { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nome { font-weight: 600; }
+.detalhe { font-size: 13px; color: var(--texto-2); }
+.contador {
+  min-width: 20px;
+  padding: 1px 6px;
+  text-align: center;
+  background: var(--destaque);
+  color: var(--destaque-texto);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#eu { border-top: 1px solid var(--linha); padding-bottom: env(safe-area-inset-bottom); }
+#alterar-nome { width: 100%; padding: 13px 16px; text-align: left; font-size: 13px; color: var(--texto-2); }
+#alterar-nome:hover { background: var(--hover); color: var(--texto); }
+#form-nome { padding: 8px; }
+#campo-nome { width: 100%; }
+
+#conversa { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+#topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 8px 16px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  background: var(--superficie);
+  border-bottom: 1px solid var(--linha);
+}
+#topo div { display: flex; flex-direction: column; min-width: 0; }
+#titulo, #subtitulo { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#subtitulo { font-size: 13px; color: var(--texto-2); }
+#voltar { display: none; margin-left: -6px; padding: 6px; }
+
+#mensagens {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mensagem { display: flex; flex-direction: column; align-items: flex-start; max-width: min(78%, 560px); }
+.mensagem.minha { align-self: flex-end; align-items: flex-end; }
+.autor { margin: 10px 0 2px; font-size: 13px; color: var(--texto-2); }
+.bolha {
+  padding: 7px 11px 5px;
+  background: var(--bolha-outra);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.minha .bolha { background: var(--bolha-minha); }
+.bolha a { color: var(--destaque); }
+.bolha.com-arquivo { padding: 4px; white-space: normal; }
+.hora { display: block; margin-top: 1px; font-size: 11px; text-align: right; color: var(--texto-2); }
+.com-arquivo .hora { padding: 0 6px 2px; }
+
+.arquivo img, .arquivo video { display: block; max-width: 100%; max-height: 320px; }
+.arquivo audio { display: block; width: 280px; max-width: 100%; }
+.arquivo-linha { display: flex; align-items: baseline; gap: 8px; padding: 6px 6px 0; }
+.arquivo-nome { font-weight: 600; overflow-wrap: anywhere; }
+.arquivo-tamanho { font-size: 13px; color: var(--texto-2); white-space: nowrap; }
+.baixar { margin-left: auto; font-size: 14px; font-weight: 600; white-space: nowrap; }
+
+#envios:empty { display: none; }
+#envios { border-top: 1px solid var(--linha); background: var(--superficie); padding: 6px 0; }
+.envio { display: flex; align-items: center; gap: 10px; padding: 4px 16px; font-size: 14px; }
+.envio-nome { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.envio progress { width: 120px; height: 4px; accent-color: var(--destaque); }
+.envio-pct { width: 40px; text-align: right; color: var(--texto-2); }
+
+#aviso {
+  margin: 0;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: var(--erro);
+  background: var(--superficie);
+  border-top: 1px solid var(--linha);
+}
+
+#form-mensagem {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--superficie);
+  border-top: 1px solid var(--linha);
+}
+#campo-texto {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  max-height: 160px;
+  padding: 14px 12px;
+  border: 0;
+  background: transparent;
+  resize: none;
+  overflow-y: hidden;
+}
+.anexar {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  color: var(--texto-2);
+  cursor: pointer;
+}
+.anexar:hover { background: var(--hover); color: var(--texto); }
+#enviar {
+  flex: none;
+  height: 52px;
+  padding: 0 20px;
+  background: var(--destaque);
+  color: var(--destaque-texto);
+  font-weight: 600;
+}
+
+#conversa.soltando::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px dashed var(--destaque);
+  background: color-mix(in srgb, var(--destaque) 8%, transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 759px) {
+  #app { grid-template-columns: 1fr; }
+  #lista { border-right: 0; }
+  #conversa { display: none; }
+  .na-conversa #lista { display: none; }
+  .na-conversa #conversa { display: flex; }
+  #voltar { display: block; }
+}
